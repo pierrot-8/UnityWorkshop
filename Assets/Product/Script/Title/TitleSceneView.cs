@@ -15,6 +15,7 @@ public class TitleSceneView : MonoBehaviour
 
     public void Initialized()
     {
+        // シーン遷移のとりあえず実装
         tapButton.onClick.AsObservable().Subscribe(a => SceneManager.LoadScene("SelectScene")).AddTo(this);
     }
 }
