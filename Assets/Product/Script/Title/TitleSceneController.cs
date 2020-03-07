@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TitleSceneController : MonoBehaviour
+namespace WorkShop.Title
 {
-    [SerializeField]
-    TitleSceneView titelView;
-
-    void Start()
+    public class TitleSceneController : MonoBehaviour
     {
-        titelView.Initialized();
+        [SerializeField]
+        TitleSceneView titelView;
+
+        void Start()
+        {
+            titelView.Initialized();
+        }
     }
 }

@@ -5,17 +5,20 @@ using UnityEngine.UI;
 using UniRx;
 using UnityEngine.SceneManagement;
 
-public class TitleSceneView : MonoBehaviour
+namespace WorkShop.Title
 {
-    [SerializeField]
-    Image backGround;
-
-    [SerializeField]
-    Button tapButton;
-
-    public void Initialized()
+    public class TitleSceneView : MonoBehaviour
     {
-        // シーン遷移のとりあえず実装 
-        tapButton.onClick.AsObservable().Subscribe(a => SceneManager.LoadScene("SelectScene")).AddTo(this);
+        [SerializeField]
+        Image backGround;
+
+        [SerializeField]
+        Button tapButton;
+
+        public void Initialized()
+        {
+            // シーン遷移のとりあえず実装 
+            tapButton.onClick.AsObservable().Subscribe(a => SceneManager.LoadScene(WorkShop.Common.SceneName.SelectScene)).AddTo(this);
+        }
     }
 }
