@@ -17,8 +17,8 @@ namespace WorkShop.Title
 
         public void Initialized()
         {
-            // シーン遷移のとりあえず実装 
-            tapButton.onClick.AsObservable().Subscribe(a => SceneManager.LoadScene(WorkShop.Common.SceneName.SelectScene)).AddTo(this);
+            // シーン遷移のアクション登録
+            tapButton.onClick.AsObservable().Subscribe(_ => SceneManager.LoadScene(WorkShop.Common.SceneName.SelectScene)).AddTo(this);
         }
     }
 }
