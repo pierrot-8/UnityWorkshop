@@ -8,6 +8,8 @@ public class SwipeController : MonoBehaviour
     GameObject targetObject;
 
     Vector3 startPosition;
+    Vector3 endPosition;
+
     Quaternion startRotation;
     Quaternion endRotation;
 
@@ -32,35 +34,51 @@ public class SwipeController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (press == false && Input.GetMouseButtonDown(0))
         {
             press = true;
+            startPosition = Input.mousePosition;
         }
 
         if (press)
         {
-            touch = Input.mousePosition;
             if (Input.GetMouseButtonUp(0))
             {
-                startPosition = touch;
-                //startRotation = targetObject.transform.rotation;
-                startRotation = endRotation;
+                endPosition = Input.mousePosition;
+                Vector3 direction = endPosition - startPosition;
+
+                // TODO ベクトルの方向を判定して Cubeの回転軸を決めて回転させる必要がある
+
+
+
                 press = false;
             }
-            else if (Input.GetMouseButton(0))
-            {
-                //Debug.Log("//// GetMousButton  ");
-                tx = (touch.x - startPosition.x) / width;
-                ty = (touch.y - startPosition.y) / height;
 
-                targetObject.transform.rotation = startRotation;
+            //if (Input.GetMouseButtonUp(0))
+            //{
+            //}
+            //else if (Input.GetMouseButton(0))
+            //{
+            //    //Debug.Log("//// GetMousButton  ");
+            //    tx = (touch.x - startPosition.x) / width;
+            //    ty = (touch.y - startPosition.y) / height;
 
-                //targetObject.transform.rotation = Quaternion.FromToRotation(startPosition, touch);
-                //targetObject.transform.rotation = Quaternion.LookRotation((touch - startPosition));
+            //    targetObject.transform.rotation = startRotation;
 
-                targetObject.transform.Rotate(new Vector3(90 * ty, -90 * tx, 0), Space.World);
-                endRotation = targetObject.transform.rotation;
-            }
-        }        
+            //    //targetObject.transform.rotation = Quaternion.FromToRotation(startPosition, touch);
+            //    //targetObject.transform.rotation = Quaternion.LookRotation((touch - startPosition));
+
+            //    targetObject.transform.Rotate(new Vector3(90 * ty, -90 * tx, 0), Space.World);
+            //    endRotation = targetObject.transform.rotation;
+            //}
+        }
+
+        // TODO 記述途中 ベクトルの方向を判定するメソッド
+        void CheckVectorDirection(Vector3 vec)
+        {
+            bool upDirection = Mathf.Abs(vec.x) <= Mathf.Abs(vec.y) ? true : false;
+
+;        }
+
     }
 }
