@@ -13,7 +13,6 @@ public class SwipeController : MonoBehaviour
     Quaternion startRotation;
     Quaternion endRotation;
 
-
     float height;
     float width;
 
@@ -34,25 +33,34 @@ public class SwipeController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (press == false && Input.GetMouseButtonDown(0))
+        // 画面をtapした
+        if (Input.GetMouseButtonDown(0))
         {
             press = true;
-            startPosition = Input.mousePosition;
+            IsCheckCubeObjectTap();
         }
 
-        if (press)
-        {
-            if (Input.GetMouseButtonUp(0))
-            {
-                endPosition = Input.mousePosition;
-                Vector3 direction = endPosition - startPosition;
-
-                // TODO ベクトルの方向を判定して Cubeの回転軸を決めて回転させる必要がある
 
 
+        //if (press == false && Input.GetMouseButtonDown(0))
+        //{
+        //    press = true;
+        //    startPosition = Input.mousePosition;
+        //}
 
-                press = false;
-            }
+        //if (press)
+        //{
+        //    if (Input.GetMouseButtonUp(0))
+        //    {
+        //        endPosition = Input.mousePosition;
+        //        Vector3 direction = endPosition - startPosition;
+
+        //        // TODO ベクトルの方向を判定して Cubeの回転軸を決めて回転させる必要がある
+
+
+
+        //        press = false;
+        //    }
 
             //if (Input.GetMouseButtonUp(0))
             //{
@@ -71,7 +79,7 @@ public class SwipeController : MonoBehaviour
             //    targetObject.transform.Rotate(new Vector3(90 * ty, -90 * tx, 0), Space.World);
             //    endRotation = targetObject.transform.rotation;
             //}
-        }
+        //}
 
         // TODO 記述途中 ベクトルの方向を判定するメソッド
         void CheckVectorDirection(Vector3 vec)
@@ -79,6 +87,23 @@ public class SwipeController : MonoBehaviour
             bool upDirection = Mathf.Abs(vec.x) <= Mathf.Abs(vec.y) ? true : false;
 
 ;        }
+
+        bool IsCheckCubeObjectTap()
+        {
+            GameObject clickObject = null;
+
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit = new RaycastHit();
+
+            if(Physics.Raycast(ray,out hit))
+            {
+                clickObject = hit.collider.gameObject;
+            }
+            Debug.Log("当たったゲームオブジェクト");
+            Debug.Log(clickObject);
+
+            return true;
+        }
 
     }
 }
